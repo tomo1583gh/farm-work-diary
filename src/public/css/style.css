@@ -1,0 +1,549 @@
+body {
+    font-family: sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #5d8b61;
+    color: #fff;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        /* 下方向の柔らかい影 */
+}
+
+.main-header h1 a {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+    /* 水平方向, 垂直方向, ぼかし, 色 */
+}
+
+/* タイトルやリンクの文字色も調整 */
+.main-header a {
+    color: white;
+    text-decoration: none;
+}
+
+.main-header a:hover {
+    text-decoration: underline;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 共通のmain-containerスタイル */
+.main-container {
+    padding: 20px;
+    /* main背景 */
+        background-color: #eeeeee;
+        /* 薄い灰色 */
+        background-image:
+            radial-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+            radial-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+        background-size: 10px 10px;
+        background-position: 0 0, 5px 5px;
+        padding: 24px;
+        min-height: 100vh;
+}
+
+/* create,editページ用の上書きスタイル */
+.works-create .main-container,
+.works-edit .main-container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th,
+td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+a {
+    color: #2b7a78;
+    text-decoration: none;
+}
+
+.error {
+    color: red;
+    font-size: 13px;
+}
+
+header h1 a {
+    color: #ffffff;
+    /* 明るい白で目立たせる */
+    text-decoration: none;
+}
+
+header h1 a:hover {
+    color: #ffeb3b;
+    /* ホバー時に黄色でさらに目立たせてもOK */
+}
+
+/* ヘッダー内のナビゲーションリンク（ログイン・会員登録） */
+header nav a {
+    color: #ffffff;
+    /* 白で目立たせる */
+    margin-left: 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header nav a:hover {
+    color: #ffeb3b;
+    /* ホバー時に黄色などにしてさらに目立たせる */
+}
+
+/* login,register */
+.auth-wrapper {
+    max-width: 500px;
+    margin: 60px auto;
+    padding: 30px;
+    border: 1px solid #ddd;
+    background-color: #fefefe;
+    border-radius: 8px;
+}
+
+.auth-title {
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 30px;
+    color: #8b7969;
+}
+
+.auth-form .form-row {
+    margin-bottom: 20px;
+}
+
+.auth-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.auth-form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    background-color: #fafafa;
+}
+
+.auth-form .error {
+    color: red;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.form-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* show */
+.work-detail {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fefefe;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    line-height: 1.6;
+}
+
+/* 見出し */
+.work-detail p strong {
+    display: inline-block;
+    width: 120px;
+    font-weight: bold;
+}
+
+/* アクションリンク */
+.actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.actions a,
+button {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 8px 14px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    outline: none;
+    border: none;
+}
+
+.actions a:hover {
+    background-color: #45a049;
+}
+
+form {
+    margin-bottom: 0;
+    display: inline;
+    /* 横並び */
+}
+
+form button.btn {
+    white-space: nowrap;
+    /* ボタン内改行を防ぐ */
+    height: 100%;
+    /* 高さ揃え */
+}
+
+.button-group {
+    display: flex;
+    gap: 12px;
+    /* ★ボタン間の統一された隙間 */
+}
+
+.button-group form {
+    margin: 0;
+}
+
+.button-group .btn {
+    white-space: nowrap;
+}
+
+/* 検索フォーム全体 */
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #f8f8f8;
+    padding: 8px 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 各inputとbutton共通 */
+.search-form input[type="text"],
+.search-form input[type="date"],
+.search-form button {
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* ボタンだけ色を変更 */
+.search-form button {
+    writing-mode: horizontal-tb;
+    /* 横書きに強制 */
+    display: inline-block;
+    width: auto;
+    min-width: 60px;
+    /* 必要に応じて調整 */
+    height: 40px;
+    padding: 8px 16px;
+    font-size: 14px;
+    text-align: center;
+    border: none;
+    background-color: #4CAF50;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* ホバー時のボタン */
+.search-form button:hover {
+    background-color: #45a049;
+}
+
+/* 作業登録・編集フォーム */
+.work-form {
+    max-width: 700px;
+    margin: 0 auto;
+    /* 中央寄せ */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.work-form div {
+    margin-bottom: 15px;
+}
+
+.work-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.work-form input,
+.work-form select,
+.work-form textarea {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.button-area {
+    text-align: center;
+}
+
+.button-area .btn {
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.button-area .btn:hover {
+    background-color: #45a049;
+}
+
+/* エラーメッセージ */
+.work-form .error {
+    color: red;
+    font-size: 13px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+/* 詳細ページ画像表示 */
+
+.work-image {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.work-image img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn {
+    display: inline-block;
+    background-color: #4CAF50;
+    /* 緑 */
+    color: #fff;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+.button-area {
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+/* =======================================
+   レスポンシブ対応
+======================================= */
+
+@media screen and (max-width: 600px) {
+
+    /* 検索フォーム */
+    .search-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-form input[type="text"],
+    .search-form input[type="date"],
+    .search-form button {
+        width: 100%;
+    }
+
+    /* フォーム */
+    .work-form {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    .work-form input[type="text"],
+    .work-form input[type="number"],
+    .work-form input[type="date"],
+    .work-form select,
+    .work-form textarea {
+        width: 100%;
+        font-size: 16px;
+    }
+
+    .work-form button {
+        width: 100%;
+        font-size: 16px;
+    }
+
+    /* 詳細ページ */
+    .work-detail {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    .work-detail p strong {
+        width: 100px;
+        display: inline-block;
+    }
+
+    /* 画像 */
+    .work-image img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* 一覧やアクションボタン */
+    .actions a {
+        display: block;
+        width: 100%;
+        margin: 5px 0;
+        text-align: center;
+    }
+}
+
+/* =======================================
+   ヘッダー全体
+======================================= */
+/* ヘッダー全体 */
+.main-header {
+    background-color: #4CAF50;
+    padding: 10px 20px;
+    color: white;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+        /* ★追加：狭い時に折り返し */
+}
+
+/* ヘッダー内フォーム */
+/* .header-container */
+.search-form {
+    flex-wrap: wrap;
+    display: flex;
+    gap: 10px;
+}
+
+/* 入力フィールドとボタンの共通 */
+.search-form input[type="text"],
+.search-form input[type="date"],
+.search-form button {
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+/* =======================================
+   レスポンシブ対応
+======================================= */
+
+@media screen and (max-width: 600px) {
+    .header-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .search-form {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-form input,
+    .search-form button {
+        width: 100%;
+    }
+}
+
+/* ページネーション全体を中央寄せ */
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    list-style: none;
+    gap: 8px;
+}
+
+/* 通常のページリンク */
+.pagination li a,
+.pagination li span {
+    display: inline-block;
+    padding: 6px 14px;
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* ホバー時のデザイン */
+.pagination li a:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* 現在のページ */
+.pagination li span[aria-current="page"] {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    cursor: default;
+}
+
+/* weather */
+.weather {
+    padding: 4px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.95em;
+}
+
+.weather.sunny {
+    background-color: orange;
+}
+
+.weather.cloudy {
+    background-color: gray;
+}
+
+.weather.rainy {
+    background-color: royalblue;
+}
+
+.weather.snowy {
+    background-color: deepskyblue;
+}
+

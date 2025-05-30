@@ -1,0 +1,236 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\Work;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\StreamedResponse;
+
+class WorkController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+        $query = Work::where('user_id', auth()->id());
+
+        // キーワード検索
+        if ($request->filled('keyword')) {
+            $keyword = mb_convert_kana(trim($request->keyword), 's');
+            $query->where(function ($q) use ($keyword) {
+                $q->where('title', 'like', "%{$keyword}%")
+                    ->orWhere('category_name', 'like', "%{$keyword}%")
+                    ->orWhere('content', 'like', "%{$keyword}%");
+            });
+        }
+        // 期間検索
+        if ($request->filled('start_date')) {
+            $query->whereDate('work_date', '>=', $request->start_date);
+        }
+
+        if ($request->filled('end_date')) {
+            $query->whereDate('work_date', '<=', $request->end_date);
+        }
+
+        $works = $query->latest()->paginate(10);
+
+        return view('works.index', compact('works'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('works.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => 'required|max:255',
+            'category_name' => 'nullable|max:255',
+            'work_time' => 'nullable|integer|min:0',
+            'content' => 'nullable',
+            'work_date' => 'required|date',
+            'weather' => 'nullable|string|max:255',
+            'image' => 'nullable|image|max:2048',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $validated['image_path'] = $request->file('image')->store('works', 'public');
+        }
+
+        $validated['user_id'] = auth()->id();
+
+        Work::create($validated);
+
+        return redirect()->route('works.index')->with('message', '作業を登録しました');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $work = Work::where('user_id', auth()->id())->findOrFail($id);
+        return view('works.show', compact('work'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $work = Work::where('user_id', auth()->id())->findOrFail($id);
+        return view('works.edit', compact('work'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'title' => 'required|max:255',
+            'category_name' => 'nullable|max:255',
+            'work_time' => 'nullable|integer|min:0',
+            'content' => 'nullable',
+            'work_date' => 'required|date',
+            'weather' => 'nullable|string|max:255',
+            'image' => 'nullable|image|max:2048',
+        ]);
+
+        $work = Work::where('user_id', auth()->id())->findOrFail($id);
+
+        // ★ 元画像削除 + 新画像保存
+        if ($request->hasFile('image')) {
+            // 古い画像を削除
+            if ($work->image_path && Storage::disk('public')->exists($work->image_path)) {
+                Storage::disk('public')->delete($work->image_path);
+            }
+            // 新しい画像を保存
+            $validated['image_path'] = $request->file('image')->store('works', 'public');
+        }
+
+        $work->update($validated);
+
+        return redirect()->route('works.index')->with('message', '作業を更新しました');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $work = Work::where('user_id', auth()->id())->findOrFail($id);
+        $work->delete();
+
+        return redirect()->route('works.index')->with('message', '作業を削除しました');
+    }
+
+    public function calendar()
+    {
+        return view('works.calendar');
+    }
+
+    public function events()
+    {
+        $works = Work::where('user_id', auth()->id())->get();
+
+            // カテゴリに応じた色分け設定
+            $colorMap = [
+                '草刈り' => '#28a745', // 緑
+                '収穫' => '#ffc107', // 黄
+                '播種' => '#007bff', // 青
+                '施肥' => '#dc3545', // 赤
+                // その他のカテゴリーに対応する色
+                'その他' => '#6c757d', // グレー
+            ];
+
+            $events = $works->map(function ($work) use ($colorMap) {
+                // カテゴリ名を正規化(前後の空白・全角半角の違いを吸収)
+                $categoryRaw = $work->category_name ?? 'その他';
+                $category = mb_convert_kana(trim($categoryRaw), 's'); // 全角->半角スペース変換
+
+            $color = $colorMap[$category] ?? '#999999';
+
+            return [
+                'id' => $work->id,
+                'title' => $work->title,
+                'start' => $work->work_date,
+                'category' => $category,
+                'content' => $work->content,
+                'weather' => $work->weather,
+                'image_url' => $work->image_path ? asset('storage/' . $work->image_path) : null,
+                'backgroundColor' => $color,
+                'borderColor' => $color,
+
+            ];
+        });
+
+        return response()->json($events);
+    }
+
+    public function export(Request $request)
+    {
+        $query = Work::where('user_id', auth()->id());
+
+        $work = $query->get();
+
+        $response = new StreamedResponse(function () use ($work) {
+            $handle = fopen('php://output', 'w');
+
+            // ヘッダー
+            $headers = ['ID', 'タイトル', '日付', 'カテゴリ', '内容', '天気'];
+            $headers = array_map(fn($val) => mb_convert_encoding($val, 'SJIS-win', 'UTF-8'), $headers);
+            fputcsv($handle, $headers);
+
+            foreach ($work as $item) {
+                $row = [
+                    $item->id,
+                    $item->title,
+                    $item->work_date,
+                    $item->category_name,
+                    $item->content,
+                    $item->weather,
+                ];
+                $row = array_map(fn($val) => mb_convert_encoding($val, 'SJIS-win', 'UTF-8'), $row);
+                fputcsv($handle, $row);
+            }
+
+            fclose($handle);
+        });
+
+        $response->headers->set('Content-Type', 'text/csv; charset=Shift_JIS');
+        $response->headers->set('Content-Disposition', 'attachment; filename="works_export.csv"');
+
+        return $response;
+    }
+}

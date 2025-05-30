@@ -1,0 +1,100 @@
+/* カレンダー用スタイル */
+
+#calendar {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.fc-daygrid-event {
+    font-size: 14px;
+    padding: 2px;
+}
+
+/* モーダル関連 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* モーダル本体 */
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    word-break: break-word;
+}
+
+/* 閉じるボタン */
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: black;
+}
+
+/* ✅ レスポンシブ対応（追加部分） */
+@media (max-width: 600px) {
+    .modal-content {
+        width: 95%;
+        padding: 15px;
+        font-size: 14px;
+    }
+
+    .modal-content h3 {
+        font-size: 16px;
+    }
+
+    .close-button {
+        font-size: 20px;
+    }
+}
+
+/* 編集機能 */
+.edit-button,
+.delete-button {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 8px 16px;
+    margin: 10px 5px 0 0;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.edit-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.edit-button:hover {
+    background-color: #0056b3;
+}
+
+.delete-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+}
