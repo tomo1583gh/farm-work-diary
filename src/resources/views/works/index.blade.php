@@ -84,6 +84,6 @@
 </table>
 
 <div class="pagination">
-    {{ $works->links() }}
+    {{ $works->appends(request()->query())->links() }}
 </div>
 @endsection
