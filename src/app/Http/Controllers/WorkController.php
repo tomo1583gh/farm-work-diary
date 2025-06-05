@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Work;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use App\Http\Requests\StoreWorkRequest;
 
 class WorkController extends Controller
 {
@@ -58,17 +59,9 @@ class WorkController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreWorkRequest $request)
     {
-        $validated = $request->validate([
-            'title' => 'required|max:255',
-            'category_name' => 'nullable|max:255',
-            'work_time' => 'nullable|integer|min:0',
-            'content' => 'nullable',
-            'work_date' => 'required|date',
-            'weather' => 'nullable|string|max:255',
-            'image' => 'nullable|image|max:2048',
-        ]);
+        $validated = $request->validated();
 
         if ($request->hasFile('image')) {
             $validated['image_path'] = $request->file('image')->store('works', 'public');
@@ -170,6 +163,7 @@ class WorkController extends Controller
                 '収穫' => '#ffc107', // 黄
                 '播種' => '#007bff', // 青
                 '施肥' => '#dc3545', // 赤
+                '束ね' => '#17a2b8', // シアン
                 // その他のカテゴリーに対応する色
                 'その他' => '#6c757d', // グレー
             ];

@@ -66,7 +66,7 @@
             </td>
             <td>
                 @if($work->image_path)
-                <img src="{{ asset('storage/' . $work->image_path) }}" style="width: 80px; height: auto;">
+                <img src="{{ asset('storage/' . $work->image_path) }}" alt="作業画像" style="width: 80px; height: auto;">
                 @endif
             </td>
 
