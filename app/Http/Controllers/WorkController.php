@@ -8,6 +8,7 @@ use App\Models\Work;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use App\Http\Requests\StoreWorkRequest;
+use App\Http\Requests\UpdateWorkRequest;
 
 class WorkController extends Controller
 {
@@ -105,17 +106,9 @@ class WorkController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateWorkRequest $request, $id)
     {
-        $validated = $request->validate([
-            'title' => 'required|max:255',
-            'category_name' => 'nullable|max:255',
-            'work_time' => 'nullable|integer|min:0',
-            'content' => 'nullable',
-            'work_date' => 'required|date',
-            'weather' => 'nullable|string|max:255',
-            'image' => 'nullable|image|max:2048',
-        ]);
+        $validated = $request->validated();
 
         $work = Work::where('user_id', auth()->id())->findOrFail($id);
 

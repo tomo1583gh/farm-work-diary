@@ -269,6 +269,10 @@ form button.btn {
     background-color: #45a049;
 }
 
+.hidden {
+    display:none;
+}
+
 /* 作業登録・編集フォーム */
 .work-form {
     max-width: 700px;
