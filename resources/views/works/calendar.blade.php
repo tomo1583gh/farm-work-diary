@@ -21,15 +21,15 @@
         <p id="modal-content"></p>
 
         <!-- ✅ 作業画像（あれば表示） -->
-        <div id="modal-image-wrapper" style="margin-top:10px;">
-            <img id="modal-image" src="" alt="作業画像" style="max-width:100%; display:none;">
+        <div id="modal-image-wrapper">
+            <img id="modal-image" src="" alt="作業画像">
         </div>
 
         <!-- ✅ 編集ボタン -->
         <a id="edit-link" href="#" class="edit-button">編集する</a>
 
         <!-- ✅ 削除フォーム（JavaScriptで動的にURLをセット） -->
-        <form id="delete-form" method="POST" style="display:inline;">
+        <form id="delete-form" method="POST">
             @csrf
             @method('DELETE')
             <button type="submit" class="delete-button" onclick="return confirm('本当に削除しますか？')">削除</button>
@@ -70,13 +70,17 @@
                 document.getElementById('edit-link').setAttribute('href', editUrl);
 
                 // ✅ 画像表示処理
-                const imageUrl = info.event.extendedProps.image_url;
                 const imageElement = document.getElementById('modal-image');
-                if (imageUrl) {
-                    imageElement.src = imageUrl;
-                    imageElement.style.display = 'block';
-                } else {
-                    imageElement.style.display = 'none';
+                const imageUrl = info.event.extendedProps.image_url;
+
+                if (imageElement) {
+                    if (imageUrl && typeof imageUrl === 'string') {
+                        imageElement.src = imageUrl;
+                        imageElement.style.display = 'block';
+                    } else {
+                        imageElement.removeAttribute('src');
+                        imageElement.style.display = 'none';
+                    }
                 }
 
                 // ✅ 削除フォームURLを設定

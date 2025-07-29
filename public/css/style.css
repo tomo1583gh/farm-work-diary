@@ -65,6 +65,15 @@ table {
     margin-top: 10px;
 }
 
+.work-image {
+    width: 80%;
+    height:auto;
+}
+
+.operation {
+    display: inline;
+}
+
 th,
 td {
     border: 1px solid #ccc;
@@ -404,7 +413,7 @@ form button.btn {
     }
 
     .work-form button {
-        width: 100%;
+        width: 20%;
         font-size: 16px;
     }
 
@@ -427,8 +436,7 @@ form button.btn {
 
     /* 一覧やアクションボタン */
     .actions a {
-        display: block;
-        width: 100%;
+        width: 20%;
         margin: 5px 0;
         text-align: center;
     }

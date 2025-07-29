@@ -66,13 +66,13 @@
             </td>
             <td>
                 @if($work->image_path)
-                <img src="{{ asset('storage/' . $work->image_path) }}" alt="作業画像" style="width: 80px; height: auto;">
+                <img src="{{ asset('storage/' . $work->image_path) }}" alt="作業画像" class="work-image">
                 @endif
             </td>
 
             <td>
                 <a href="{{ route('works.edit', $work) }}">編集</a>
-                <form action="{{ route('works.destroy', $work) }}" method="POST" style="display:inline;">
+                <form action="{{ route('works.destroy', $work) }}" method="POST" class="operation">
                     @csrf
                     @method('DELETE')
                     <button type="submit" onclick="return confirm('削除してもよろしいですか？')">削除</button>

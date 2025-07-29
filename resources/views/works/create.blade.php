@@ -53,7 +53,7 @@
         @error('content') <div class="error">{{ $message }}</div> @enderror
     </div>
 
-    <div class="button-area">
+    <div class="actions">
         <button type="submit" class="btn">登録</button>
         <a href="{{ route('works.index') }}" class="btn">一覧に戻る</a>
     </div>

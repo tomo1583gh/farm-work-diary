@@ -36,6 +36,17 @@
     word-break: break-word;
 }
 
+/* 作業画像ラッパー */
+#modal-image-wrapper {
+    margin-top: 10px;
+}
+
+/* 作業画像 */
+#modal-image {
+    max-width: 100%;
+    display: none;
+}
+
 /* 閉じるボタン */
 .close-button {
     color: #aaa;

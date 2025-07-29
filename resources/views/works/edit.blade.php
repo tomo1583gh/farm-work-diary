@@ -57,7 +57,7 @@
     </div>
 
 
-    <div class="button-area">
+    <div class="actions">
         <button type="submit" class="btn">更新</button>
         <a href="{{ route('works.index') }}" class="btn">一覧に戻る</a>
     </div>
