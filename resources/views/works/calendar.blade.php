@@ -56,7 +56,7 @@
             locale: 'ja', // 日本語表示
             headerToolbar: {
                 left: 'prev,next today',
-                center: 'crops',
+                center: 'title',
                 right: 'dayGridMonth,listWeek'
             },
 

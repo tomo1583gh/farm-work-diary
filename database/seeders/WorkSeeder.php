@@ -58,5 +58,10 @@ class WorkSeeder extends Seeder
                 'image_path' => null, // 画像はなし
             ]));
         }
+
+        // ✅ Factoryを使って追加で10件作成
+        Work::factory()->count(5)->create([
+            'user_id' => $user->id,
+        ]);
     }
 }

@@ -16,37 +16,30 @@ class WorkFactory extends Factory
 
     protected $model = Work::class;
 
-    public function definition()
+    public function definition(): array
     {
         // faker日本語化
         $faker = \Faker\Factory::create('ja_JP');
 
+        $cropsList = [
+            'トマト', '大根', 'キャベツ', 'ピーマン', 'にんじん'
+        ];
+        $workDetailsList = [
+            '草刈り', '播種', '収穫', '施肥', '整枝', 'みず'
+        ];
+        $weatherList = [
+            '晴れ', '曇り', '雨', '雪'
+        ];
+
         return [
-            'user_id' => User::factory(),
-            'crops' => $faker->realText(30),
-            'work_details' => $faker->randomElement([
-                'トマト',
-                'きゅうり',
-                'ナス',
-                '大根',
-                'レタス',
-                'キャベツ',
-                'ほうれん草',
-                'ピーマン',
-                'いちご',
-                '米',
-                '桜葉',
-                'その他',
-            ]),
-            'work_time' => $faker->numberBetween(30, 300),
-            'content' => $faker->randomElement([
-                'トマトの苗を一本ずつ植え付けました。暑かったので水やりをしっかりしました。',
-                'キャベツの間引きを行い、健康な苗だけを残しました。',
-                'きゅうりの実を早朝に収穫しました。サイズも色も良好です。',
-                'ナスの摘果作業をして、今後の成長を促進させました。',
-                '大根の種まきを終えました。来週には発芽予定です。',
-            ]),
-            'work_date' => $faker->date('Y-m-d'),
+            'user_id' => 1,
+            'crops' => $this->faker->randomElement($cropsList),
+            'work_details' => $this->faker->randomElement($workDetailsList),
+            'work_time' => $this->faker->numberBetween(30, 300),
+            'work_date' => $this->faker->dateTimeBetween('-1 year', 'now')->format('Y-m-d'),
+            'content' => $this->faker->realText(50),
+            'weather' => $this->faker->randomElement($weatherList),
+            'image_path' => null, // 画像はなし
         ];
     }
 }
