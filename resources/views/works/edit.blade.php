@@ -52,7 +52,7 @@
 
     <div>
         <label>内容:</label> <!-- 日本語 -->
-        <textarea name="content">{{ old('content', $work->content ?? '') }}</textarea>
+        <textarea name="content" rows="5">{{ old('content', $work->content ?? '') }}</textarea>
         @error('content') <div class="error">{{ $message }}</div> @enderror
     </div>
 

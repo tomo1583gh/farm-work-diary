@@ -59,7 +59,7 @@
                 @endswitch
             </td>
             <td>{{ $work->crops }}</td>
-            <td>{{ $work->category_name }}</td>
+            <td>{{ $work->work_details }}</td>
             <td>{{ $work->work_time }}</td>
             <td>
                 <a href="{{ route('works.show', $work->id) }}">{{ $work->crops }}</a>
@@ -75,7 +75,7 @@
                 <form action="{{ route('works.destroy', $work) }}" method="POST" class="operation">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" onclick="return confirm('削除してもよろしいですか？')">削除</button>
+                    <button type="submit" class="delete-button" onclick=" return confirm('削除してもよろしいですか？')">削除</button>
                 </form>
             </td>
         </tr>

@@ -170,11 +170,13 @@ class WorkController extends Controller
 
             return [
                 'id' => $work->id,
+                'title' => $work->crops,
                 'crops' => $work->crops,
                 'start' => $work->work_date,
-                'work_details' => $work_details,
+                'work_details' => $work->work_details,
                 'content' => $work->content,
                 'weather' => $work->weather,
+                'work_time' => $work->work_time,
                 'image_url' => $work->image_path ? asset('storage/' . $work->image_path) : null,
                 'backgroundColor' => $color,
                 'borderColor' => $color,
@@ -195,7 +197,7 @@ class WorkController extends Controller
             $handle = fopen('php://output', 'w');
 
             // ヘッダー
-            $headers = ['ID', '作物名', '日付', '作業内容', '内容', '天気'];
+            $headers = ['ID', '作物名', '日付', '作業内容', '作業時間', '内容', '天気'];
             $headers = array_map(fn($val) => mb_convert_encoding($val, 'SJIS-win', 'UTF-8'), $headers);
             fputcsv($handle, $headers);
 
@@ -207,6 +209,7 @@ class WorkController extends Controller
                     $item->work_details,
                     $item->content,
                     $item->weather,
+                    $item->work_time,
                 ];
                 $row = array_map(fn($val) => mb_convert_encoding($val, 'SJIS-win', 'UTF-8'), $row);
                 fputcsv($handle, $row);

@@ -13,18 +13,50 @@ class WorkSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
-        // ① まずユーザーを5人作る
-        $users = User::factory()->count(5)->create();
+        $user = User::first(); // 1人目のユーザーに紐付け（必須）
 
-        // ② 各ユーザーに6件ずつ作業（Work）を作成（5人×6件＝30件）
-        foreach ($users as $user) {
-            Work::factory()
-                ->count(6)
-                ->create([
-                    'user_id' => $user->id, // ユーザーごとに紐づける
-                ]);
-            }
+        if (!$user) {
+            $user = User::factory()->create([ // ユーザーがいない場合は新規作成
+                'name' => 'テストユーザー',
+                'email' => 'test@example.com',
+                'password' => bcrypt('password'),
+            ]);
+        }
+
+        $works = [
+            [
+                'work_date' => '2025-07-31',
+                'weather' => '晴れ',
+                'crops' => '大根',
+                'work_details' => '草刈り',
+                'work_time' => 120,
+                'content' => '畑の外周の草刈りを実施',
+            ],
+            [
+                'work_date' => '2025-07-28',
+                'weather' => '曇り',
+                'crops' => 'キャベツ',
+                'work_details' => '播種',
+                'work_time' => 90,
+                'content' => '苗ポットに播種作業を行なった',
+            ],
+            [
+                'work_date' => '2025-07-25',
+                'weather' => '雨',
+                'crops' => 'トマト',
+                'work_details' => '施肥',
+                'work_time' => 60,
+                'content' => '元肥として堆肥を投入',
+            ],
+        ];
+
+        foreach ($works as $work) {
+            Work::create(array_merge($work, [
+                'user_id' => $user->id, // ユーザーIDを設定
+                'image_path' => null, // 画像はなし
+            ]));
+        }
     }
 }

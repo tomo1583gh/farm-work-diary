@@ -13,10 +13,12 @@
 <!-- モーダルHTML-->
 <div id="eventModal" class="modal">
     <div class="modal-content">
-        <h3 id="modal-crops"></h3>
+        <h3 id="modal-title"></h3>
         <p><strong>日付：</strong> <span id="modal-date"></span></p>
-        <p><strong>カテゴリ：</strong> <span id="modal-work_details"></span></p>
         <p><strong>天気：</strong> <span id="modal-weather"></span></p>
+        <p><strong>作物名：</strong> <span id="modal-crops"></span></p>
+        <p><strong>作業内容：</strong> <span id="modal-work_details"></span></p>
+        <p><strong>作業時間：</strong> <span id="modal-work_time"></span></p>
         <p><strong>内容：</strong></p>
         <p id="modal-content"></p>
 
@@ -64,6 +66,7 @@
                 document.getElementById('modal-work_details').textContent = info.event.extendedProps.work_details || '-';
                 document.getElementById('modal-weather').textContent = info.event.extendedProps.weather || '-';
                 document.getElementById('modal-content').textContent = info.event.extendedProps.content || '-';
+                document.getElementById('modal-work_time').textContent = info.event.extendedProps.work_time + '分' || '-';
 
                 // ✅ 編集リンクに動的URLをセット
                 const editUrl = `/works/${info.event.id}/edit`;

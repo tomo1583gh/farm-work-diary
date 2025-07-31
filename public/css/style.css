@@ -207,6 +207,12 @@ button {
     background-color: #45a049;
 }
 
+.delete-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+}
+
 form {
     margin-bottom: 0;
     display: inline;
