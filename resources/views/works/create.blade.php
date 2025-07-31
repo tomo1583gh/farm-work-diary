@@ -24,15 +24,15 @@
     </div>
 
     <div>
-        <label>タイトル:</label> <!-- 日本語 -->
-        <input type="text" name="title" value="{{ old('title', $work->title ?? '') }}">
-        @error('title') <div class="error">{{ $message }}</div> @enderror
+        <label>作物名:</label> <!-- 日本語 -->
+        <input type="text" name="crops" value="{{ old('crops', $work->crops ?? '') }}">
+        @error('crops') <div class="error">{{ $message }}</div> @enderror
     </div>
 
     <div>
-        <label>カテゴリ:</label> <!-- 日本語 -->
-        <input type="text" name="category_name" value="{{ old('category_name', $work->category_name ?? '') }}">
-        @error('category_name') <div class="error">{{ $message }}</div> @enderror
+        <label>作業内容:</label> <!-- 日本語 -->
+        <input type="text" name="work_details" value="{{ old('work_details', $work->work_details ?? '') }}">
+        @error('work_details') <div class="error">{{ $message }}</div> @enderror
     </div>
 
     <div>
@@ -49,7 +49,7 @@
 
     <div>
         <label>内容:</label> <!-- 日本語 -->
-        <textarea name="content">{{ old('content', $work->content ?? '') }}</textarea>
+        <textarea name="content" rows="5">{{ old('content', $work->content ?? '') }}</textarea>
         @error('content') <div class="error">{{ $message }}</div> @enderror
     </div>
 

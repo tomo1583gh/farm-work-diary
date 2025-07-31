@@ -23,12 +23,12 @@ class WorkFactory extends Factory
 
         return [
             'user_id' => User::factory(),
-            'title' => $faker->realText(30),
-            'category_name' => $faker->randomElement([
+            'crops' => $faker->realText(30),
+            'work_details' => $faker->randomElement([
                 'トマト',
                 'きゅうり',
                 'ナス',
-                'だいこん',
+                '大根',
                 'レタス',
                 'キャベツ',
                 'ほうれん草',
@@ -44,7 +44,7 @@ class WorkFactory extends Factory
                 'キャベツの間引きを行い、健康な苗だけを残しました。',
                 'きゅうりの実を早朝に収穫しました。サイズも色も良好です。',
                 'ナスの摘果作業をして、今後の成長を促進させました。',
-                'だいこんの種まきを終えました。来週には発芽予定です。',
+                '大根の種まきを終えました。来週には発芽予定です。',
             ]),
             'work_date' => $faker->date('Y-m-d'),
         ];

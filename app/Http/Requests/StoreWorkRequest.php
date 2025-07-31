@@ -24,8 +24,8 @@ class StoreWorkRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|max:255',
-            'category_name' => 'required|max:255',
+            'crops' => 'required|max:255',
+            'work_details' => 'required|max:255',
             'work_time' => 'nullable|integer|min:0',
             'content' => 'nullable',
             'work_date' => 'required|date',
@@ -37,15 +37,14 @@ class StoreWorkRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => 'タイトルは必須です',
-            'title.max' => 'タイトルは255文字以内で入力してください',
-            'category_name.required' => 'カテゴリを選択してください',
-            'category_name.max' => 'カテゴリ名は255文字以内で入力してください',
+            'crops.required' => '作物名は必須です',
+            'crops.max' => '作物名は255文字以内で入力してください',
+            'work_details_name.required' => '作業内容を入力してください',
+            'work_details.max' => '作業内容は255文字以内で入力してください',
             'work_time.integer' => '作業時間は半角数字で入力してください',
             'work_time.min' => '作業時間は0以上で入力してください',
             'work_date.required' => '作業日を入力してください',
             'work_date.date' => '正しい日付形式で入力してください',
-            'weather.max' => '天気は255文字以内で入力してください',
             'image.image' => '画像ファイルをアップロードしてください',
             'image.max' => '画像は5MB以内にしてください',
         ];

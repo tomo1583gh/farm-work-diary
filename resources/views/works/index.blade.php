@@ -29,8 +29,8 @@
         <tr>
             <th>作業日</th>
             <th>天気</th>
-            <th>タイトル</th>
-            <th>カテゴリ</th>
+            <th>作物名</th>
+            <th>作業内容</th>
             <th>作業時間（分）</th>
             <th>詳細</th>
             <th>画像</th>
@@ -58,11 +58,11 @@
                 <span class="weather">-</span>
                 @endswitch
             </td>
-            <td>{{ $work->title }}</td>
+            <td>{{ $work->crops }}</td>
             <td>{{ $work->category_name }}</td>
             <td>{{ $work->work_time }}</td>
             <td>
-                <a href="{{ route('works.show', $work->id) }}">{{ $work->title }}</a>
+                <a href="{{ route('works.show', $work->id) }}">{{ $work->crops }}</a>
             </td>
             <td>
                 @if($work->image_path)

@@ -13,9 +13,9 @@
 <!-- モーダルHTML-->
 <div id="eventModal" class="modal">
     <div class="modal-content">
-        <h3 id="modal-title"></h3>
+        <h3 id="modal-crops"></h3>
         <p><strong>日付：</strong> <span id="modal-date"></span></p>
-        <p><strong>カテゴリ：</strong> <span id="modal-category"></span></p>
+        <p><strong>カテゴリ：</strong> <span id="modal-work_details"></span></p>
         <p><strong>天気：</strong> <span id="modal-weather"></span></p>
         <p><strong>内容：</strong></p>
         <p id="modal-content"></p>
@@ -54,14 +54,14 @@
             locale: 'ja', // 日本語表示
             headerToolbar: {
                 left: 'prev,next today',
-                center: 'title',
+                center: 'crops',
                 right: 'dayGridMonth,listWeek'
             },
 
             eventClick: function(info) {
-                document.getElementById('modal-title').textContent = info.event.title;
+                document.getElementById('modal-crops').textContent = info.event.crops;
                 document.getElementById('modal-date').textContent = info.event.startStr;
-                document.getElementById('modal-category').textContent = info.event.extendedProps.category || '-';
+                document.getElementById('modal-work_details').textContent = info.event.extendedProps.work_details || '-';
                 document.getElementById('modal-weather').textContent = info.event.extendedProps.weather || '-';
                 document.getElementById('modal-content').textContent = info.event.extendedProps.content || '-';
 

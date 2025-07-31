@@ -25,8 +25,8 @@ class WorkController extends Controller
         if ($request->filled('keyword')) {
             $keyword = mb_convert_kana(trim($request->keyword), 's');
             $query->where(function ($q) use ($keyword) {
-                $q->where('title', 'like', "%{$keyword}%")
-                    ->orWhere('category_name', 'like', "%{$keyword}%")
+                $q->where('crops', 'like', "%{$keyword}%")
+                    ->orWhere('work_details', 'like', "%{$keyword}%")
                     ->orWhere('content', 'like', "%{$keyword}%");
             });
         }
@@ -163,16 +163,16 @@ class WorkController extends Controller
 
             $events = $works->map(function ($work) use ($colorMap) {
                 // カテゴリ名を正規化(前後の空白・全角半角の違いを吸収)
-                $categoryRaw = $work->category_name ?? 'その他';
-                $category = mb_convert_kana(trim($categoryRaw), 's'); // 全角->半角スペース変換
+                $categoryRaw = $work->work_details ?? 'その他';
+                $work_details = mb_convert_kana(trim($categoryRaw), 's'); // 全角->半角スペース変換
 
-            $color = $colorMap[$category] ?? '#999999';
+            $color = $colorMap[$work_details] ?? '#999999';
 
             return [
                 'id' => $work->id,
-                'title' => $work->title,
+                'crops' => $work->crops,
                 'start' => $work->work_date,
-                'category' => $category,
+                'work_details' => $work_details,
                 'content' => $work->content,
                 'weather' => $work->weather,
                 'image_url' => $work->image_path ? asset('storage/' . $work->image_path) : null,
@@ -195,16 +195,16 @@ class WorkController extends Controller
             $handle = fopen('php://output', 'w');
 
             // ヘッダー
-            $headers = ['ID', 'タイトル', '日付', 'カテゴリ', '内容', '天気'];
+            $headers = ['ID', '作物名', '日付', '作業内容', '内容', '天気'];
             $headers = array_map(fn($val) => mb_convert_encoding($val, 'SJIS-win', 'UTF-8'), $headers);
             fputcsv($handle, $headers);
 
             foreach ($work as $item) {
                 $row = [
                     $item->id,
-                    $item->title,
+                    $item->crops,
                     $item->work_date,
-                    $item->category_name,
+                    $item->work_details,
                     $item->content,
                     $item->weather,
                 ];
