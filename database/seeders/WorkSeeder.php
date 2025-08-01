@@ -56,10 +56,8 @@ class WorkSeeder extends Seeder
         ];
 
         foreach ($works as $work) {
-            Work::create(array_merge($work, [
-                'user_id' => $user->id, // ユーザーIDを設定
-                'image_path' => null, // 画像はなし
-            ]));
+            $work['user_id'] = $user->id;
+            work::create($work);
         }
 
         // ✅ Factoryを使って追加で10件作成

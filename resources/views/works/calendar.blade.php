@@ -61,8 +61,8 @@
             },
 
             eventClick: function(info) {
-                document.getElementById('modal-crops').textContent = info.event.crops;
                 document.getElementById('modal-date').textContent = info.event.startStr;
+                document.getElementById('modal-crops').textContent = info.event.extendedProps.crops || '-';
                 document.getElementById('modal-work_details').textContent = info.event.extendedProps.work_details || '-';
                 document.getElementById('modal-weather').textContent = info.event.extendedProps.weather || '-';
                 document.getElementById('modal-content').textContent = info.event.extendedProps.content || '-';
