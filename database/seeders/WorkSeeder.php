@@ -33,6 +33,7 @@ class WorkSeeder extends Seeder
                 'work_details' => '草刈り',
                 'work_time' => 120,
                 'content' => '畑の外周の草刈りを実施',
+                'image_path' => 'works/daikon.png',
             ],
             [
                 'work_date' => '2025-07-28',
@@ -41,6 +42,7 @@ class WorkSeeder extends Seeder
                 'work_details' => '播種',
                 'work_time' => 90,
                 'content' => '苗ポットに播種作業を行なった',
+                'image_path' => 'works/cabbage.png',
             ],
             [
                 'work_date' => '2025-07-25',
@@ -49,6 +51,7 @@ class WorkSeeder extends Seeder
                 'work_details' => '施肥',
                 'work_time' => 60,
                 'content' => '元肥として堆肥を投入',
+                'image_path' => 'works/tomato.png',
             ],
         ];
 

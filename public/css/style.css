@@ -66,8 +66,11 @@ table {
 }
 
 .work-image {
-    width: 80%;
+    width: 150px;
     height:auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;
 }
 
 .operation {
@@ -346,11 +349,6 @@ form button.btn {
 }
 
 /* 詳細ページ画像表示 */
-
-.work-image {
-    text-align: center;
-    margin-top: 20px;
-}
 
 .work-image img {
     max-width: 100%;
