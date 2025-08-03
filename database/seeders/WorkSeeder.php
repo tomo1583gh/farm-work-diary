@@ -18,7 +18,7 @@ class WorkSeeder extends Seeder
         $user = User::first(); // 1人目のユーザーに紐付け（必須）
 
         if (!$user) {
-            $user = User::factory()->create([ // ユーザーがいない場合は新規作成
+            $user = User::create([ // ユーザーがいない場合は新規作成
                 'name' => 'テストユーザー',
                 'email' => 'test@example.com',
                 'password' => bcrypt('password'),
@@ -57,7 +57,7 @@ class WorkSeeder extends Seeder
 
         foreach ($works as $work) {
             $work['user_id'] = $user->id;
-            work::create($work);
+            Work::create($work);
         }
 
         // ✅ Factoryを使って追加で10件作成
