@@ -204,11 +204,11 @@ class WorkController extends Controller
             foreach ($work as $item) {
                 $row = [
                     $item->id,
-                    $item->crops,
                     $item->work_date,
+                    $item->weather,
+                    $item->crops,
                     $item->work_details,
                     $item->content,
-                    $item->weather,
                     $item->work_time,
                 ];
                 $row = array_map(fn($val) => mb_convert_encoding($val, 'SJIS-win', 'UTF-8'), $row);
