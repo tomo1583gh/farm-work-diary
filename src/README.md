@@ -1,61 +1,96 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 「農作業日誌」
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+農作業の記録を日付・作業内容・天気・画像付きで管理できるWebアプリです。  
+個人農家向けに、シンプルで直感的な操作性を重視しています。
 
-## About Laravel
+## 実装済み機能一覧
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- ユーザー認証（Fortify使用）
+- 農作業の登録・編集・削除
+- 作業日、天気、カテゴリ、キーワード検索
+- 作業画像のアップロード・表示
+- 年月やキーワードでのフィルタリング
+- カレンダー表示機能
+- CSVエクスポート
+- ユーザーごとのデータ管理
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## dockerビルド手順
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. リポジトリのクローン
 
-## Learning Laravel
+    `git clone https://github.com:tomo1583gh/farm-work-diary.git`
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+2. 階層を変更
+　　`cd farm-work-diary`
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+3. Dockerコンテナのビルド・起動
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+    `docker-compose up -d --build`
 
-## Laravel Sponsors
+    ※  MySQLは、OSによって起動しない場合があるのでそれぞれのPCに合わせてdocker-compose.ymlファイルを編集して下さい。
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## laravel　環境構築
 
-### Premium Partners
+1. PHPコンテナに入る
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+    `docker-compose exec php bash`
 
-## Contributing
+2. Composerで依存パッケージをインストール
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    `composer install`
 
-## Code of Conduct
+3. .envファイルを作成
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+    `cp .env.example .env`
 
-## Security Vulnerabilities
+    必要に応じて環境変数を編集
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+4. アプリケーションキーを生成
 
-## License
+    `php artisan key:generate`
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+5. マイグレーションを実行
+
+    `php artisan migrate`
+
+6. 初期データを投入
+
+    `php artisan db:seed`
+
+## 使用技術
+
+- php 8.2.12
+
+- laravel 8.83.29
+
+- MySQL 8.0.26
+
+- Fortify【認証機能】
+
+- Mailhog【メール確認】
+
+- Stripe【支払い処理】
+
+- Blade + CSS
+
+- Docker
+
+## URL
+
+- 開発環境：http://localhost:8000
+
+- phpMyAdmin:http://localhost:8080
+
+- Mailhog:http://localhost:8025
+
+- Stripe:https://dashboard.stripe.com/test
+
+## テストユーザーについて
+
+アプリ起動後、Seederにより自動でテストユーザーが作成されます  
+ログインや購入機能の動作確認にご利用ください
+
+### ログイン情報（ダミーユーザー）
+
+メールアドレス：test@example.com  
+パスワード：password
