@@ -16,7 +16,7 @@
         <input type="hidden" name="keyword" value="{{ request('keyword') }}">
         <input type="hidden" name="start_date" value="{{ request('start_date') }}">
         <input type="hidden" name="end_date" value="{{ request('end_date') }}">
-        <button type="submit" class="btn btn-success">CSVエクスポート</button>
+        <button type="submit" class="btn btn-outline-secondary">CSVエクスポート</button>
     </form>
 </div>
 
