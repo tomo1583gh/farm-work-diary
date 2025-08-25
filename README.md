@@ -18,7 +18,7 @@
 
 1. リポジトリのクローン
 
-    `git clone https://github.com:tomo1583gh/farm-work-diary.git`
+    `git clone git@github.com:tomo1583gh/farm-work-diary.git`
 
 2. 階層を変更
 　　`cd farm-work-diary`
