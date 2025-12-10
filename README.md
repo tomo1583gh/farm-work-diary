@@ -67,10 +67,6 @@
 
 - Fortify【認証機能】
 
-- Mailhog【メール確認】
-
-- Stripe【支払い処理】
-
 - Blade + CSS
 
 - Docker
@@ -81,9 +77,6 @@
 
 - phpMyAdmin:http://localhost:8080
 
-- Mailhog:http://localhost:8025
-
-- Stripe:https://dashboard.stripe.com/test
 
 ## テストユーザーについて
 
