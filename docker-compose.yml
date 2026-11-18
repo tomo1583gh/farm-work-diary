@@ -1,6 +1,7 @@
 services:
   nginx:
     image: nginx:1.21.1
+    restart: unless-stopped
     # platform: linux/amd64 # mac の場合は有効にすること
     ports:
       - "80:80"
@@ -12,11 +13,13 @@ services:
 
   php:
     build: ./docker/php
+    restart: unless-stopped
     volumes:
       - ./src:/var/www/
 
   mysql:
     image: mysql:8.0.26
+    restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: laravel_db
@@ -29,6 +32,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
+    restart: unless-stopped
     # platform: linux/amd64 # mac の場合は有効にすること
     environment:
       - PMA_ARBITRARY=1
